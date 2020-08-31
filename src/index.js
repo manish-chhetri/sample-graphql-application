@@ -1,17 +1,14 @@
-import { ApolloServer } from "apollo-server";
+const { ApolloServer } = require('apollo-server')
+const resolvers = require(__dirname + '/resolvers')
+const typeDefs = require(__dirname + '/typedefs')
 
-import resolvers from "./resolvers";
-import typeDefs from "./typedefs";
+async function startServer() {
+    const server = new ApolloServer({ typeDefs, resolvers });
+    return await server.listen(process.env.GRAPHQL_PORT || 8080);
+    //console.log(server);
+}
 
-const server = new ApolloServer({ resolvers, typeDefs });
-
-server.listen(process.env.GRAPHQL_PORT || 8080).then(({ url }) => {
+startServer().then(({ url }) => {
   console.log(`Server ready at ${url}`);
 });
 
-if (module.hot) {
-  module.hot.accept();
-  module.hot.dispose(() => {
-    console.log("Module disposed");
-  });
-}
