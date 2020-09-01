@@ -6,7 +6,7 @@ async function startServer() {
     const server = new ApolloServer({ typeDefs, resolvers, context: ({ req }) => {
             const token = req.headers.authorization || '';
             const chatToken = req.headers.chat_token || '';
-            const origin = req.headers.x_origin_panamera || '';
+            const origin = req.headers.origin_panamera || '';
 
             return { "authorization": token, "x-access-token": chatToken, "x-origin-panamera": origin };
         } });
