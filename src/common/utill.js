@@ -8,3 +8,14 @@ async function fetchURL(url, headers)
 }
 
 exports.fetchURL = fetchURL;
+
+function getResolvedData (res) {
+    if (typeof res.error === 'undefined') {
+        return res.data
+    } else {
+        let err = new Error(res.statusText)
+        err.response = res
+        return err
+    }
+}
+exports.getResolvedData = getResolvedData;

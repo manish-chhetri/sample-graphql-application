@@ -7,13 +7,15 @@ const typeDefs = gql`
             ad_id: ID!,
             peer_id: ID!,
             user_id: ID!,
-            question_categories_list: [Int],
-            pricing_categories_list: [Int]
+            question_categories_list: [String],
+            pricing_categories_list: [String]
         ): chatResponseObj
     },
     type chatResponseObj {
         ad: Ad,
-        user: User
+        user: User,
+        questions: [Question],
+        pricing: Pricing
     },
     type Ad {
         id: ID!,
@@ -62,6 +64,21 @@ const typeDefs = gql`
         name_provided: String!,
         phone: String!,
         verification_status: String!
+    },
+    type Question {
+        question_text: String,
+        question_id: String,
+        topic: String,
+        subtopic: String,
+        priority: String,
+        sub_topic_display: String,
+        type: String
+    },
+    type Pricing {
+        predicted_price: Int,
+        min_price: Int,
+        max_price: Int,
+        offers_made: Int
     }`
 
 module.exports = typeDefs
