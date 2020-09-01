@@ -13,14 +13,14 @@ const resolvers =  {
             const peerUrl = gatewayUrl + `/api/v1/users/${peer_id}`
             let questionUrl = xchatDomainUrl + `/user/questions?ad_id=${ad_id}&category_id={category-id}&peer_id=${peer_id}&sender_type={sender-type}`
             let pricingUrl = xchatDomainUrl + `/user/pricing?ad_id=${ad_id}`
-            let peerInfo = utill.fetchURL(peerUrl, headers)
+            let peerInfo = utill.fetchURL(peerUrl, 'GET', headers)
 
             //Ad info
-            const adObj = utill.fetchURL(adUrl, headers).then(adRes => {
+            const adObj = utill.fetchURL(adUrl, 'GET' ,headers).then(adRes => {
                 if (user_id != adRes.data.user_id) {
                     peerInfo.then(peerRes => {
                         if (peerRes.data.is_phone_visible === true && adRes.data.has_phone_param === true) {
-                            adRes.data.phone = utill.fetchURL(adPhoneUrl, headers).then(adPhoneRes => {
+                            adRes.data.phone = utill.fetchURL(adPhoneUrl, 'GET', headers).then(adPhoneRes => {
                                 return adPhoneRes.data.ad_phone
                             })
                         }
@@ -36,7 +36,7 @@ const resolvers =  {
             chatDataResponseObj.pricing = adObj.then(res => {
                 let pricingInfo = {}
                 if (pricing_categories_list.includes(res.data.category_id)) {
-                    pricingInfo = utill.fetchURL(pricingUrl, headers).then(res => utill.getResolvedData(res))
+                    pricingInfo = utill.fetchURL(pricingUrl, 'GET', headers).then(res => utill.getResolvedData(res))
                 }
                 return pricingInfo
             })
@@ -53,7 +53,7 @@ const resolvers =  {
                 questionUrl =  questionUrl.replace('{sender-type}', senderType)
 
                 if (question_categories_list.includes(categoryId)) {
-                    questionInfo = utill.fetchURL(questionUrl, headers).then(res => utill.getResolvedData(res))
+                    questionInfo = utill.fetchURL(questionUrl, 'GET', headers).then(res => utill.getResolvedData(res))
                 }
                 return questionInfo
             })

@@ -1,12 +1,20 @@
-const fetch = require('node-fetch')
+const request = require('request-promise');
 
-async function fetchURL(url, headers)
+async function fetchURL(url, method, headers)
 {
-    let response = await fetch(url, { method: 'GET', headers: headers});
-    let data = await response.json();
-    return data;
+    const options = {
+        url: url,
+        method: method,
+        headers: headers,
+        json: true
+    };
+    try {
+        let response = await request(options);
+        return await response;
+    } catch (err) {
+        console.error(err);
+    }
 }
-
 exports.fetchURL = fetchURL;
 
 function getResolvedData (res) {
