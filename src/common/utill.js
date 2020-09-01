@@ -13,6 +13,9 @@ async function fetchURL(url, method, headers)
         return await response;
     } catch (err) {
         console.error(err);
+        let newErrObj = new Error(err.message)
+        newErrObj.statusCode = err.statusCode
+        return newErrObj;
     }
 }
 exports.fetchURL = fetchURL;
