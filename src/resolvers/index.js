@@ -4,10 +4,22 @@ const resolvers =  {
     Query: {
         getChatData: (parent, args, headers) => {
 
-            const { ad_id, peer_id, user_id, question_categories_list, pricing_categories_list } = args
+            const { ad_id, peer_id, user_id, question_categories_list, pricing_categories_list, sitecode } = args
             let chatDataResponseObj = {};
-            const gatewayUrl = `https://api.olx.in`;
-            const xchatDomainUrl = `https://xchat.olx.in`;
+
+            let gatewayUrl = null
+            let xchatDomainUrl = null
+            let supportedSitecode = ["olxin"]
+            switch (sitecode) {
+                case `olxin`:
+                    gatewayUrl = `https://api.olx.in`;
+                    xchatDomainUrl = `https://xchat.olx.in`;
+                    break;
+            }
+            if (typeof sitecode === 'undefined' || !supportedSitecode.includes(sitecode)) {
+                let err = utill.setErrorData('Sitecode not supported', 400)
+                return err
+            }
             const adUrl = gatewayUrl + `/api/v2/items/${ad_id}`
             const adPhoneUrl = gatewayUrl + `/api/v2/items/${ad_id}/params?filter=ad_phone`
             const peerUrl = gatewayUrl + `/api/v1/users/${peer_id}`

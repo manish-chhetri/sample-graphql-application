@@ -30,3 +30,10 @@ function getResolvedData (res) {
     }
 }
 exports.getResolvedData = getResolvedData;
+
+function setErrorData (msg, statuscode) {
+    let err = new Error(msg)
+    err.statusCode = statuscode
+    return err
+}
+exports.setErrorData = setErrorData;
