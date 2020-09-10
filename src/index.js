@@ -7,8 +7,9 @@ async function startServer() {
             const token = req.headers.authorization || '';
             const chatToken = req.headers.chat_token || '';
             const origin = req.headers.origin_panamera || '';
+            const userAgent = req.headers.user_agent || 'GraphQL 1.0';
 
-            return { "authorization": token, "x-access-token": chatToken, "x-origin-panamera": origin };
+            return { "authorization": token, "x-access-token": chatToken, "x-origin-panamera": origin, "user-agent": userAgent };
         } });
     return await server.listen(process.env.GRAPHQL_PORT || 8080);
 }
