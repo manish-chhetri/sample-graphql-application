@@ -67,10 +67,10 @@ const typeDefs = gql`
     },
     type Question {
         question_text: String,
-        question_id: String,
+        question_id: Int,
         topic: String,
         subtopic: String,
-        priority: String,
+        priority: Int,
         related_ad_param: String,
         intent: [String],
         sub_topic_display: String,
