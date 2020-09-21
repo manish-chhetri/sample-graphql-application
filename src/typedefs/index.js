@@ -30,13 +30,13 @@ const typeDefs = gql`
         location_source: String,
         description: String!,
         category_id: String!,
-        favorites: String,
+        favorites: adFavoritesObj,
         status: adStatusObj,
         locations: String,
-        images: [imageObj],
+        images: [adImageObj],
         user_id: String!,
         price: adPriceObj,
-        parameters: String!,
+        parameters: [adParametersObj],
         views: String,
         replies: String,
         calls: String,
@@ -51,15 +51,15 @@ const typeDefs = gql`
         about: String,
         anonymous: String,
         avatar_id: String,
-        badges: String,
+        badges: [userBadgesObj],
         created_at: String!,
         has_phone: String!,
-        images: String!,
+        images: [userImageObj],
         is_banned: String!,
         is_business: String!,
         is_phone_visible: String!,
         lang: String!,
-        locations: String!,
+        locations: locationsObj,
         name: String!,
         name_provided: String!,
         phone: String!,
@@ -114,7 +114,7 @@ const typeDefs = gql`
         new: Boolean,
         hot: Boolean
     },
-    type imageObj {
+    type adImageObj {
         id: String,
         external_id: String,
         width: Int,
@@ -125,10 +125,48 @@ const typeDefs = gql`
         medium: imageDetailObj,
         small: imageDetailObj
     },
+    type userImageObj {
+        id: String,
+        external_id: String,
+        width: Int,
+        height: Int,
+        url: String,
+        big: imageDetailObj,
+        medium: imageDetailObj,
+        background: imageDetailObj,
+        small: imageDetailObj
+    },
     type imageDetailObj {
         width: Int,
         height: Int,
         url: String
+    },
+    type adFavoritesObj {
+        count: Int,
+        count_label: String,
+        count_label_next: String,
+        count_label_prev: String
+    },
+    type userBadgesObj {
+        name: String,
+        status: String,
+        type: String
+    },
+    type locationsObj {
+        city_id: String,
+        district_id: String,
+        lat: Int,
+        lon: Int,
+        region_id: String,
+        subregion_id: String
+    },
+    type adParametersObj {
+        type: String,
+        key: String,
+        key_name: String,
+        value: String,
+        value_name: String,
+        formatted_value: String,
     }`
 
 module.exports = typeDefs
