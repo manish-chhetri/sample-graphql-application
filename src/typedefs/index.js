@@ -31,11 +31,11 @@ const typeDefs = gql`
         description: String!,
         category_id: String!,
         favorites: String,
-        status: String,
+        status: adStatusObj,
         locations: String,
-        images: String!,
+        images: [imageObj],
         user_id: String!,
-        price: PriceObj,
+        price: adPriceObj,
         parameters: String!,
         views: String,
         replies: String,
@@ -84,21 +84,51 @@ const typeDefs = gql`
         max_price: Int,
         offers_made: Int
     },
-    type PriceObj {
+    type adPriceObj {
         key: String,
         key_name: String,
-        value: PriceValueObj
+        value: adPriceValueObj
     },
-    type PriceValueObj {
+    type adPriceValueObj {
         raw: String,
         display: String,
-        currency: PriceValueCurrencyObj
+        currency: adPriceValueCurrencyObj
     },
-    type PriceValueCurrencyObj {
+    type adPriceValueCurrencyObj {
         pre: String,
         post: String,
         iso_4217: String,
         locale: String
+    },
+    type adStatusObj {
+        status: String,
+        link: String,
+        message: String,
+        allow_edit: String,
+        display: String,
+        translated_display: String,
+        flags: adStatusFlagObj,
+        ban_reason_id: String
+    },
+    type adStatusFlagObj {
+        new: Boolean,
+        hot: Boolean
+    },
+    type imageObj {
+        id: String,
+        external_id: String,
+        width: Int,
+        height: Int,
+        url: String,
+        full: imageDetailObj,
+        big: imageDetailObj,
+        medium: imageDetailObj,
+        small: imageDetailObj
+    },
+    type imageDetailObj {
+        width: Int,
+        height: Int,
+        url: String
     }`
 
 module.exports = typeDefs
