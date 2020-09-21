@@ -35,7 +35,7 @@ const typeDefs = gql`
         locations: String,
         images: String!,
         user_id: String!,
-        price: String,
+        price: PriceObj,
         parameters: String!,
         views: String,
         replies: String,
@@ -71,14 +71,34 @@ const typeDefs = gql`
         topic: String,
         subtopic: String,
         priority: String,
+        related_ad_param: String,
+        intent: [String],
         sub_topic_display: String,
-        type: String
+        type: String,
+        queried: Boolean,
+        response: String
     },
     type Pricing {
         predicted_price: Int,
         min_price: Int,
         max_price: Int,
         offers_made: Int
+    },
+    type PriceObj {
+        key: String,
+        key_name: String,
+        value: PriceValueObj
+    },
+    type PriceValueObj {
+        raw: String,
+        display: String,
+        currency: PriceValueCurrencyObj
+    },
+    type PriceValueCurrencyObj {
+        pre: String,
+        post: String,
+        iso_4217: String,
+        locale: String
     }`
 
 module.exports = typeDefs
