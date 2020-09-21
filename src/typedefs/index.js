@@ -155,8 +155,8 @@ const typeDefs = gql`
     type locationsObj {
         city_id: String,
         district_id: String,
-        lat: Double,
-        lon: Double,
+        lat: Float,
+        lon: Float,
         region_id: String,
         subregion_id: String
     },
