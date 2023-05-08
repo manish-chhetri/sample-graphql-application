@@ -1,6 +1,6 @@
 version: '3.3'
 services: 
-  common-graphql:
+  sample-graphql-application:
     build: .
     ports:
       - "8000:3000"

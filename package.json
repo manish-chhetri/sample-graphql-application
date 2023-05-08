@@ -1,5 +1,5 @@
 {
-  "name": "common-graphql",
+  "name": "sample-graphql-application",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manish-olx/common-graphql.git"
+    "url": "git+https://github.com/manish-chhetri/sample-graphql-application.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/manish-olx/common-graphql/issues"
+    "url": "https://github.com/manish-chhetri/sample-graphql-application/issues"
   },
-  "homepage": "https://github.com/manish-olx/common-graphql#readme",
+  "homepage": "https://github.com/manish-chhetri/sample-graphql-application#readme",
   "dependencies": {
     "apollo-server": "2.16.1",
     "graphql": "15.3.0",
